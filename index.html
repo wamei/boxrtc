@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>dev20160312</title>
+    <script src="https://skyway.io/dist/0.3/peer.js"></script>
+    <script src="./boxrtc.js"></script>
+    <script src="./lib/Box2D.js"></script>
+    <style type="text/css">
+      body {
+          overflow: hidden;
+      }
+
+      video {
+          width: 100%;
+      }
+
+      #game p {
+          margin: 0;
+          margin-top: -4px;
+          font-size: 8pt;
+          line-height: 1em;
+      }
+
+      #game {
+          position: absolute;
+          top: 100px;
+      }
+
+      #list {
+          position: absolute;
+          display: none;
+          border: solid 1px #000;
+      }
+
+      #game .player p {
+          overflow: hidden;
+      }
+
+      #game .player .death {
+          position: absolute;
+          top: 0px;
+          left: 0px;
+          width: 20px;
+          height: 20px;
+          background-color: #fff;
+      }
+
+      #game .player .jump {
+          position: absolute;
+          top: -20px;
+          left: 40px;
+          width: 20px;
+          height: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="myid"></div>
+    <div id="join">
+      <input type="text"><button class="join">join</button><button class="list">list</button>
+    </div>
+    <div id="list"></div>
+    <div id="chat"></div>
+    <div id="game">
+      <canvas id="canvas" width="1960" height="1280"></canvas>
+    </div>
+  </body>
+</html>
