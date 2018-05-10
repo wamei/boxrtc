@@ -409,7 +409,7 @@ var Com = function (_EventEmitter) {
 
         var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Com).call(this));
 
-        _this.peer = new Peer({ key: '59ba085c-f078-4edd-8fdc-d8efe298aa8d' });
+        _this.peer = new Peer({ key: '7a864c39-8149-49da-9cf2-88706e3172d1' });
         _this.peer.on('open', function (id) {
             _this.id = id;
             _this.emit('open', id);
