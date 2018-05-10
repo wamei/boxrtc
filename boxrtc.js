@@ -1,4 +1,4 @@
-(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+(function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
 'use strict';
 
 var _com = require('./com.js');
@@ -407,7 +407,7 @@ var Com = function (_EventEmitter) {
     function Com() {
         _classCallCheck(this, Com);
 
-        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Com).call(this));
+        var _this = _possibleConstructorReturn(this, (Com.__proto__ || Object.getPrototypeOf(Com)).call(this));
 
         _this.peer = new Peer({ key: '7a864c39-8149-49da-9cf2-88706e3172d1' });
         _this.peer.on('open', function (id) {
@@ -586,7 +586,7 @@ var Loop = function (_EventEmitter) {
     function Loop() {
         _classCallCheck(this, Loop);
 
-        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Loop).call(this));
+        var _this = _possibleConstructorReturn(this, (Loop.__proto__ || Object.getPrototypeOf(Loop)).call(this));
 
         _this.skipTicks = 1000 / 60;
         _this.maxFrameSkip = 10;
@@ -652,7 +652,7 @@ var Base = function (_EventEmitter) {
     function Base(width, height, x, y) {
         _classCallCheck(this, Base);
 
-        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Base).call(this));
+        var _this = _possibleConstructorReturn(this, (Base.__proto__ || Object.getPrototypeOf(Base)).call(this));
 
         _this.x = x || 0;
         _this.y = y || 0;
@@ -726,7 +726,7 @@ var Player = function (_Base) {
     function Player(conn, stream) {
         _classCallCheck(this, Player);
 
-        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Player).call(this, 100, 100));
+        var _this = _possibleConstructorReturn(this, (Player.__proto__ || Object.getPrototypeOf(Player)).call(this, 100, 100));
 
         _this.id = conn ? conn.peer : null;
         _this.conn = conn;
@@ -862,8 +862,12 @@ EventEmitter.prototype.emit = function(type) {
       er = arguments[1];
       if (er instanceof Error) {
         throw er; // Unhandled 'error' event
+      } else {
+        // At least give some kind of context to the user
+        var err = new Error('Uncaught, unspecified "error" event. (' + er + ')');
+        err.context = er;
+        throw err;
       }
-      throw TypeError('Uncaught, unspecified "error" event.');
     }
   }
 

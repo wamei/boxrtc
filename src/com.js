@@ -5,7 +5,7 @@ var EventEmitter = require('events').EventEmitter;
 class Com extends EventEmitter {
     constructor() {
         super();
-        this.peer = new Peer({key: '59ba085c-f078-4edd-8fdc-d8efe298aa8d'});
+        this.peer = new Peer({key: '7a864c39-8149-49da-9cf2-88706e3172d1'});
         this.peer.on('open', (id) => {
             this.id = id;
             this.emit('open', id);
