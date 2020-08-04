@@ -703,7 +703,7 @@ exports.default = Base;
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
-    value: true
+  value: true
 });
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -721,84 +721,86 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var Player = function (_Base) {
-    _inherits(Player, _Base);
+  _inherits(Player, _Base);
 
-    function Player(conn, stream) {
-        _classCallCheck(this, Player);
+  function Player(conn, stream) {
+    _classCallCheck(this, Player);
 
-        var _this = _possibleConstructorReturn(this, (Player.__proto__ || Object.getPrototypeOf(Player)).call(this, 100, 100));
+    var _this = _possibleConstructorReturn(this, (Player.__proto__ || Object.getPrototypeOf(Player)).call(this, 100, 100));
 
-        _this.id = conn ? conn.peer : null;
-        _this.conn = conn;
-        _this.call = null;
+    _this.id = conn ? conn.peer : null;
+    _this.conn = conn;
+    _this.call = null;
 
-        _this.death = 0;
-        _this.jumpNum = 0;
+    _this.death = 0;
+    _this.jumpNum = 0;
 
-        _this.$el.style.border = 'solid 1px #000';
-        _this.$el.style.backgroundColor = '#fff';
-        _this.$el.className += ' player';
+    _this.$el.style.border = 'solid 1px #000';
+    _this.$el.style.backgroundColor = '#fff';
+    _this.$el.className += ' player';
 
-        _this.$video = document.createElement('video');
-        _this.$name = document.createElement('p');
-        _this.$el.appendChild(_this.$video);
-        _this.$el.appendChild(_this.$name);
+    _this.$video = document.createElement('video');
+    _this.$name = document.createElement('p');
+    _this.$el.appendChild(_this.$video);
+    _this.$el.appendChild(_this.$name);
 
-        _this.$death = document.createElement('div');
-        _this.$death.className = 'death';
-        _this.$el.appendChild(_this.$death);
+    _this.$death = document.createElement('div');
+    _this.$death.className = 'death';
+    _this.$el.appendChild(_this.$death);
 
-        if (stream) {
-            _this.addVideo(stream);
-        } else if (!conn && !stream) {
-            navigator.webkitGetUserMedia({ video: {
-                    mandatory: {
-                        maxWidth: 100,
-                        maxHeight: 80,
-                        maxFrameRate: 24
-                    }
-                }, audio: true }, function (stream) {
-                _this.addVideo(stream, true);
-                _this.$jump = document.createElement('div');
-                _this.$jump.className = 'jump';
-                _this.$el.appendChild(_this.$jump);
-            }, function (err) {
-                console.log(err);
-            });
-        }
-
-        _this.setName(_this.id);
-        _this.name = 'player';
-        return _this;
+    if (stream) {
+      _this.addVideo(stream);
+    } else if (!conn && !stream) {
+      navigator.webkitGetUserMedia({
+        video: {
+          mandatory: {
+            maxWidth: 100,
+            maxHeight: 80,
+            maxFrameRate: 24
+          }
+        }, audio: true
+      }, function (stream) {
+        _this.addVideo(stream, true);
+        _this.$jump = document.createElement('div');
+        _this.$jump.className = 'jump';
+        _this.$el.appendChild(_this.$jump);
+      }, function (err) {
+        console.log(err);
+      });
     }
 
-    _createClass(Player, [{
-        key: 'setName',
-        value: function setName(name) {
-            this.$name.innerHTML = name;
-        }
-    }, {
-        key: 'addVideo',
-        value: function addVideo(stream, my) {
-            this.$video.src = window.URL.createObjectURL(stream);
-            this.$video.play();
-            this.stream = stream;
+    _this.setName(_this.id);
+    _this.name = 'player';
+    return _this;
+  }
 
-            if (my) {
-                this.$video.setAttribute('muted', '');
-            }
-        }
-    }, {
-        key: 'update',
-        value: function update() {
-            this.$death.innerHTML = this.death;
-            // if (this.$jump) {
-            //     this.$jump.innerHTML = 2 - this.jumpNum;
-            // }
-        }
-    }]);
+  _createClass(Player, [{
+    key: 'setName',
+    value: function setName(name) {
+      this.$name.innerHTML = name;
+    }
+  }, {
+    key: 'addVideo',
+    value: function addVideo(stream, my) {
+      this.$video.srcObject = stream;
+      this.$video.play();
+      this.stream = stream;
 
-    return Player;
+      if (my) {
+        this.$video.setAttribute('muted', '');
+      }
+    }
+  }, {
+    key: 'update',
+    value: function update() {
+      this.$death.innerHTML = this.death;
+      // if (this.$jump) {
+      //     this.$jump.innerHTML = 2 - this.jumpNum;
+      // }
+    }
+  }]);
+
+  return Player;
 }(_base2.default);
 
 exports.default = Player;
