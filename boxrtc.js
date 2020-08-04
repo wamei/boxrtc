@@ -787,7 +787,7 @@ var Player = function (_Base) {
       this.stream = stream;
 
       if (my) {
-        this.$video.setAttribute('muted', '');
+        this.$video.muted = true;
       }
     }
   }, {
